@@ -1,6 +1,7 @@
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Layout from '@/components/Layout';
 import { API_URL } from 'config';
+import EventItem from '@/components/EventItem';
 
 interface IEvent {
   id: string;
@@ -26,10 +27,15 @@ export const getStaticProps: GetStaticProps<{ events: IEvent[] }> = async () => 
   };
 };
 
-const Home = ({ events }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(events[0]);
+const Home = ({ events }: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <Layout title='Home'>
+    <h1>Events </h1>
+    {!events.length && <h1>No events yet</h1>}
 
-  return <Layout title='Home'>Upcoming Events</Layout>;
-};
+    {events.map(item => (
+      <EventItem key={item.id} event={item} />
+    ))}
+  </Layout>
+);
 
 export default Home;
