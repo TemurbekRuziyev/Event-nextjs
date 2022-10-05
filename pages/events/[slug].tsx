@@ -2,10 +2,12 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import Layout from '../../components/Layout';
+import Layout from '@/components/Layout';
 
 const SingleEvent = () => {
-  const { back } = useRouter();
+  const { back, ...args } = useRouter();
+
+  console.log(args);
 
   return (
     <Layout title='Single event'>
